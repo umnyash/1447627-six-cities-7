@@ -1,0 +1,132 @@
+{
+  "api": {
+    "titles": [
+      "Tile House",
+      "House in countryside",
+      "Canal View Prinsengracht",
+      "Loft Studio in the Central Area",
+      "Wood and stone place",
+      "Amazing and Extremely Central Flat",
+      "Beautiful & luxurious apartment at great location",
+      "Waterfront with extraordinary view",
+      "The house among olive",
+      "Penthouse, 4-5 rooms + 5 balconies"
+    ],
+    "descriptions": [
+      "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
+      "The building is green and from 18th century",
+      "An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful."
+    ],
+    "cities": [
+      "Amsterdam",
+      "Brussels",
+      "Cologne",
+      "Dusseldorf",
+      "Hamburg",
+      "Paris"
+    ],
+    "locations": [
+      {
+        "latitude": 48.85661,
+        "longitude": 2.351499
+      },
+      {
+        "latitude": 48.85761,
+        "longitude": 2.358499
+      },
+      {
+        "latitude": 50.938361,
+        "longitude": 6.959974
+      },
+      {
+        "latitude": 50.930361,
+        "longitude": 6.937974
+      },
+      {
+        "latitude": 50.846557,
+        "longitude": 4.351697
+      },
+      {
+        "latitude": 50.827557,
+        "longitude": 4.336697
+      },
+      {
+        "latitude": 52.37454,
+        "longitude": 4.897976
+      },
+      {
+        "latitude": 52.36854,
+        "longitude": 4.887976
+      },
+      {
+        "latitude": 53.550341,
+        "longitude": 10.000654
+      },
+      {
+        "latitude": 53.565341,
+        "longitude": 9.978654
+      },
+      {
+        "latitude": 51.225402,
+        "longitude": 6.776314
+      },
+      {
+        "latitude": 51.237402,
+        "longitude": 6.797314
+      }
+    ],
+    "photos": [
+      "apartment-01.jpg",
+      "apartment-02.jpg",
+      "apartment-03.jpg",
+      "apartment-04.jpg",
+      "apartment-05.jpg",
+      "apartment-06.jpg"
+    ],
+    "housingTypes": [
+      "apartment",
+      "hotel",
+      "house",
+      "room"
+    ],
+    "amenities": [
+      "Air conditioning",
+      "Baby seat",
+      "Breakfast",
+      "Fridge",
+      "Laptop friendly workspace",
+      "Towels",
+      "Washer"
+    ],
+    "userNames": [
+      "Ivan Ivanov",
+      "Oleg Sidorov",
+      "Roland Disney",
+      "Hole Gibnie",
+      "Jack Torrens",
+      "John Smith"
+    ],
+    "userEmails": [
+      "snow@pisem.local",
+      "president@dka.local",
+      "fish@big.local",
+      "test@pisem.local",
+      "freedom@pisem.local",
+      "rolan@pochta.local",
+      "author@mir.local",
+      "test@lost.loca",
+      "kujo-fan@story.local"
+    ],
+    "userTypes": [
+      "обычный",
+      "pro"
+    ],
+    "avatars": [
+      "user.jpg",
+      "photo.jpg",
+      "awesome-avatar.jpg",
+      "avatar-angelina.jpg",
+      "avatar-max.jpg"
+    ]
+  }
+}
