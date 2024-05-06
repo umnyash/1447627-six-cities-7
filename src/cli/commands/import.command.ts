@@ -1,3 +1,5 @@
+import chalk from 'chalk';
+
 import { Command } from './command.interface.js';
 import { TSVFileReader } from '../../shared/libs/file-reader/tsv-file-reader.js';
 import { Offer, FileReaderEvent } from '../../shared/types/index.js';
@@ -18,6 +20,12 @@ export class ImportCommand implements Command {
 
   public async execute(...parameters: string[]): Promise<void> {
     const [filename] = parameters;
+
+    if (!filename) {
+      console.error(chalk.hex('ff0000')('The path to the file is not specified.'));
+      return;
+    }
+
     const fileReader = new TSVFileReader(filename.trim());
 
     fileReader.on(FileReaderEvent.Line, this.onImportedOffer);
