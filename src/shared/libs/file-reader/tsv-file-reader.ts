@@ -2,6 +2,8 @@ import EventEmitter from 'node:events';
 import { createReadStream } from 'node:fs';
 
 import { FileReader } from './file-reader.interface.js';
+import { parseArray, parseBoolean, parseNumber } from '../../helpers/index.js';
+
 import {
   AmenityName, CityName, HousingType, UserType,
   Location, Offer, User,
@@ -48,26 +50,18 @@ export class TSVFileReader extends EventEmitter implements FileReader {
       postDate: new Date(postDate),
       city: city as CityName,
       previewPhoto,
-      photos: this.parsePhotos(photos),
-      isPremium: isPremium === 'true',
-      isFavorite: isFavorite === 'true',
-      rating: this.parseRating(rating),
+      photos: parseArray(photos),
+      isPremium: parseBoolean(isPremium),
+      isFavorite: parseBoolean(isFavorite),
+      rating: parseNumber(rating, 1),
       housingType: housingType as HousingType,
-      numberOfRooms: this.parseNumberOfRooms(numberOfRooms),
-      numberOfGuests: this.parseNumberOfGuests(numberOfGuests),
-      price: this.parsePrice(price),
-      amenities: this.parseAmenities(amenities),
+      numberOfRooms: parseNumber(numberOfRooms),
+      numberOfGuests: parseNumber(numberOfGuests),
+      price: parseNumber(price),
+      amenities: parseArray(amenities) as AmenityName[],
       author: this.parseUser(userName, userEmail, userPassword, userType as UserType, userAvatar),
       location: this.parseLocation(locationLatitude, locationLongitude),
     };
-  }
-
-  private parsePhotos(photosString: string): string[] {
-    return photosString.split(';').map((photo) => photo);
-  }
-
-  private parseAmenities(amenitiesString: string): AmenityName[] {
-    return amenitiesString.split(';').map((amenity) => amenity as AmenityName);
   }
 
   private parseUser(
@@ -84,22 +78,6 @@ export class TSVFileReader extends EventEmitter implements FileReader {
       type,
       avatar,
     };
-  }
-
-  private parseNumberOfRooms(numberString: string): number {
-    return parseInt(numberString, 10);
-  }
-
-  private parseNumberOfGuests(numberString: string): number {
-    return parseInt(numberString, 10);
-  }
-
-  private parsePrice(priceString: string): number {
-    return parseInt(priceString, 10);
-  }
-
-  private parseRating(ratingString: string): number {
-    return parseFloat(ratingString);
   }
 
   private parseLocation(latitude: string, longitude: string): Location {
