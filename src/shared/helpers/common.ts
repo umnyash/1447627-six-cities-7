@@ -15,3 +15,18 @@ export function getRandomItems<T>(items: T[]): T[] {
 export function getErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : '';
 }
+
+export function parseArray(string: string, separator = ';'): string[] {
+  return string.split(separator);
+}
+
+export function parseBoolean(string: string): boolean {
+  return string === 'true';
+}
+
+export function parseNumber(string: string, numAfterDigit = 0): number {
+  const RADIX = 10;
+  const factor = Math.pow(RADIX, numAfterDigit);
+
+  return Math.trunc(parseFloat(string) * factor) / factor;
+}
