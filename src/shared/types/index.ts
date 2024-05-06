@@ -8,4 +8,5 @@ export { MockServerData } from './mock-server-data.type.js';
 export { Offer } from './offer.type.js';
 export { User } from './user.type.js';
 
+export { CommandName } from './command-name.enum.js';
 export { FileReaderEvent } from './file-reader-event.enum.js';

@@ -1,7 +1,7 @@
 import got from 'got';
 
 import { Command } from './command.interface.js';
-import { MockServerData } from '../../shared/types/index.js';
+import { MockServerData, CommandName } from '../../shared/types/index.js';
 import { TSVOfferGenerator } from '../../shared/libs/offer-generator/index.js';
 import { TSVFileWriter } from '../../shared/libs/file-writer/index.js';
 import { getErrorMessage } from '../../shared/helpers/index.js';
@@ -27,7 +27,7 @@ export class GenerateCommand implements Command {
   }
 
   public getName(): string {
-    return '--generate';
+    return `--${CommandName.Generate}`;
   }
 
   public async execute(...parameters: string[]): Promise<void> {

@@ -2,7 +2,7 @@ import chalk from 'chalk';
 
 import { Command } from './command.interface.js';
 import { TSVFileReader } from '../../shared/libs/file-reader/tsv-file-reader.js';
-import { Offer, FileReaderEvent } from '../../shared/types/index.js';
+import { Offer, FileReaderEvent, CommandName } from '../../shared/types/index.js';
 import { getErrorMessage } from '../../shared/helpers/index.js';
 
 export class ImportCommand implements Command {
@@ -15,7 +15,7 @@ export class ImportCommand implements Command {
   }
 
   public getName(): string {
-    return '--import';
+    return `--${CommandName.Import}`;
   }
 
   public async execute(...parameters: string[]): Promise<void> {
