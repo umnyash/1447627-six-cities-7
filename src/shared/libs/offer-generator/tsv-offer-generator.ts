@@ -3,18 +3,13 @@ import dayjs from 'dayjs';
 import { OfferGenerator } from './offer-generator.interface.js';
 import { MockServerData } from '../../types/index.js';
 import { generateRandomValue, getRandomItem, getRandomItems } from '../../helpers/index.js';
-
-const MIN_PRICE = 100;
-const MAX_PRICE = 100000;
-const MIN_RATING = 1;
-const MAX_RATING = 5;
-const RATING_ACCURACY = 1;
-const MIN_NUMBERS_OF_ROOMS = 1;
-const MAX_NUMBER_OF_ROOMS = 8;
-const MIN_NUMBERS_OF_GUESTS = 1;
-const MAX_NUMBER_OF_GUESTS = 10;
-const FIRST_WEEK_DAY = 1;
-const LAST_WEEK_DAY = 7;
+import {
+  MIN_PRICE, MAX_PRICE,
+  MIN_RATING, MAX_RATING, RATING_ACCURACY,
+  MIN_NUMBERS_OF_ROOMS, MAX_NUMBER_OF_ROOMS,
+  MIN_NUMBERS_OF_GUESTS, MAX_NUMBER_OF_GUESTS,
+  FIRST_WEEK_DAY, LAST_WEEK_DAY,
+} from './tsv-offer-generator.const.js';
 
 export class TSVOfferGenerator implements OfferGenerator {
   constructor(private readonly mockData: MockServerData) { }
