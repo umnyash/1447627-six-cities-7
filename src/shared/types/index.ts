@@ -7,3 +7,5 @@ export { Location } from './location.type.js';
 export { MockServerData } from './mock-server-data.type.js';
 export { Offer } from './offer.type.js';
 export { User } from './user.type.js';
+
+export { FileReaderEvent } from './file-reader-event.enum.js';
