@@ -11,3 +11,7 @@ export function getRandomItems<T>(items: T[]): T[] {
   const endPosition = startPosition + generateRandomValue(startPosition, items.length);
   return items.slice(startPosition, endPosition);
 }
+
+export function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : '';
+}
