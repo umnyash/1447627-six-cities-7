@@ -22,7 +22,12 @@ export class CLIApplication {
   }
 
   public getCommand(commandName: string): Command {
-    return this.commands[commandName] ?? this.getDefaultCommand();
+    if (!this.commands[commandName]) {
+      console.error(`The ${commandName} command not found.`);
+      return this.getDefaultCommand();
+    }
+
+    return this.commands[commandName];
   }
 
   public getDefaultCommand(): Command | never {
