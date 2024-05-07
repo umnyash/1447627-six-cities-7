@@ -6,8 +6,8 @@ import { generateRandomValue, getRandomItem, getRandomItems } from '../../helper
 import {
   MIN_PRICE, MAX_PRICE,
   MIN_RATING, MAX_RATING, RATING_ACCURACY,
-  MIN_NUMBERS_OF_ROOMS, MAX_NUMBER_OF_ROOMS,
-  MIN_NUMBERS_OF_GUESTS, MAX_NUMBER_OF_GUESTS,
+  MIN_NUMBER_OF_ROOMS, MAX_NUMBER_OF_ROOMS,
+  MIN_NUMBER_OF_GUESTS, MAX_NUMBER_OF_GUESTS,
   FIRST_WEEK_DAY, LAST_WEEK_DAY,
 } from './tsv-offer-generator.const.js';
 
@@ -24,8 +24,8 @@ export class TSVOfferGenerator implements OfferGenerator {
     const isFavorite = Boolean(generateRandomValue(0, 1));
     const rating = generateRandomValue(MIN_RATING, MAX_RATING, RATING_ACCURACY);
     const housingType = getRandomItem(this.mockData.housingTypes);
-    const numberOfRooms = generateRandomValue(MIN_NUMBERS_OF_ROOMS, MAX_NUMBER_OF_ROOMS);
-    const numberOfGuests = generateRandomValue(MIN_NUMBERS_OF_GUESTS, MAX_NUMBER_OF_GUESTS);
+    const numberOfRooms = generateRandomValue(MIN_NUMBER_OF_ROOMS, MAX_NUMBER_OF_ROOMS);
+    const numberOfGuests = generateRandomValue(MIN_NUMBER_OF_GUESTS, MAX_NUMBER_OF_GUESTS);
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE);
     const amenities = getRandomItems(this.mockData.amenities).join(';');
     const userName = getRandomItem(this.mockData.userNames);
