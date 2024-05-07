@@ -7,7 +7,7 @@ export class HelpCommand implements Command {
     return `--${CommandName.Help}`;
   }
 
-  public async execute(..._parameters: string[]): Promise<void> {
+  public execute(..._parameters: string[]): void {
     console.info(`
       ${chalk.bgWhite.bold(' Программа для подготовки данных для REST API сервера. ')}
 

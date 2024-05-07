@@ -18,7 +18,7 @@ export class ImportCommand implements Command {
     return `--${CommandName.Import}`;
   }
 
-  public async execute(...parameters: string[]): Promise<void> {
+  public execute(...parameters: string[]): void {
     const [filename] = parameters;
 
     if (!filename) {
