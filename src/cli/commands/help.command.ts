@@ -3,7 +3,7 @@ import { Command } from './command.interface.js';
 import { CommandName } from '../../shared/types/index.js';
 
 export class HelpCommand implements Command {
-  public getName() {
+  get name() {
     return `--${CommandName.Help}`;
   }
 

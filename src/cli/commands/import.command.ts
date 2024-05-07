@@ -14,7 +14,7 @@ export class ImportCommand implements Command {
     console.info(`${count} rows imported.`);
   }
 
-  public getName() {
+  get name() {
     return `--${CommandName.Import}`;
   }
 
