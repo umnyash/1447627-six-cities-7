@@ -33,7 +33,7 @@ export class VersionCommand implements Command {
     return importedContent.version;
   }
 
-  get name() {
+  public get name() {
     return `--${CommandName.Version}`;
   }
 

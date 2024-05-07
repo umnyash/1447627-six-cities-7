@@ -1,4 +1,4 @@
 export interface Command {
-  name: string;
+  get name(): string;
   execute(...parameters: string[]): Promise<void> | void;
 }

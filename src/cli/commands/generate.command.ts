@@ -26,7 +26,7 @@ export class GenerateCommand implements Command {
     }
   }
 
-  get name() {
+  public get name() {
     return `--${CommandName.Generate}`;
   }
 
