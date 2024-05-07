@@ -24,10 +24,9 @@ export class CLIApplication {
   public getCommand(commandName: string): Command {
     if (!this.commands[commandName]) {
       console.error(`The ${commandName} command not found.`);
-      return this.getDefaultCommand();
     }
 
-    return this.commands[commandName];
+    return this.commands[commandName] ?? this.getDefaultCommand();
   }
 
   public getDefaultCommand(): Command | never {
