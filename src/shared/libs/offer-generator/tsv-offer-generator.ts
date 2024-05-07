@@ -38,14 +38,11 @@ export class TSVOfferGenerator implements OfferGenerator {
       .subtract(generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day')
       .toISOString();
 
-    const {
-      latitude: locationLatitude,
-      longitude: locationLongitude,
-    } = getRandomItem(this.mockData.locations);
+    const { latitude, longitude } = getRandomItem(this.mockData.locations);
 
     return [
       title, description, postDate,
-      city, locationLatitude, locationLongitude,
+      city, latitude, longitude,
       previewPhoto, photos,
       isPremium, isFavorite, rating,
       housingType, numberOfRooms, numberOfGuests, price, amenities,
