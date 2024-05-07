@@ -5,7 +5,7 @@ import { FileReader } from './file-reader.interface.js';
 import { parseArray, parseBoolean, parseNumber } from '../../helpers/index.js';
 
 import {
-  AmenityName, CityName, HousingType, UserType,
+  CityName, HousingType, UserType,
   Location, Offer, User,
   FileReaderEvent,
 } from '../../types/index.js';
@@ -58,7 +58,7 @@ export class TSVFileReader extends EventEmitter implements FileReader {
       numberOfRooms: parseNumber(numberOfRooms),
       numberOfGuests: parseNumber(numberOfGuests),
       price: parseNumber(price),
-      amenities: parseArray(amenities) as AmenityName[],
+      amenities: parseArray(amenities),
       author: this.parseUser(userName, userEmail, userPassword, userType as UserType, userAvatar),
       location: this.parseLocation(locationLatitude, locationLongitude),
     };

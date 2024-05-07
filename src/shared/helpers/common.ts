@@ -16,8 +16,8 @@ export function getErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : '';
 }
 
-export function parseArray(string: string, separator = ';'): string[] {
-  return string.split(separator);
+export function parseArray<T>(string: string, separator = ';'): T[] {
+  return string.split(separator) as T[];
 }
 
 export function parseBoolean(string: string): boolean {
