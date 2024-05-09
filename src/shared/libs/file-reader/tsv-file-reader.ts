@@ -3,6 +3,7 @@ import { createReadStream } from 'node:fs';
 
 import { FileReader } from './file-reader.interface.js';
 import { parseArray, parseBoolean, parseNumber } from '../../helpers/index.js';
+import { RATING_ACCURACY } from '../../constants/index.js';
 
 import {
   CityName, HousingType, UserType,
@@ -53,7 +54,7 @@ export class TSVFileReader extends EventEmitter implements FileReader {
       photos: parseArray(photos),
       isPremium: parseBoolean(isPremium),
       isFavorite: parseBoolean(isFavorite),
-      rating: parseNumber(rating, 1),
+      rating: parseNumber(rating, RATING_ACCURACY),
       housingType: housingType as HousingType,
       numberOfRooms: parseNumber(numberOfRooms),
       numberOfGuests: parseNumber(numberOfGuests),

@@ -9,7 +9,7 @@ import {
   MIN_NUMBER_OF_ROOMS, MAX_NUMBER_OF_ROOMS,
   MIN_NUMBER_OF_GUESTS, MAX_NUMBER_OF_GUESTS,
   FIRST_WEEK_DAY, LAST_WEEK_DAY,
-} from './tsv-offer-generator.const.js';
+} from '../../constants/index.js';
 
 export class TSVOfferGenerator implements OfferGenerator {
   constructor(private readonly mockData: MockServerData) { }

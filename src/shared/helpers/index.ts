@@ -7,3 +7,5 @@ export {
   parseBoolean,
   parseNumber,
 } from './common.js';
+
+export { getCurrentModuleDirectoryPath } from './file-system.js';
