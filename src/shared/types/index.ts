@@ -10,3 +10,5 @@ export { User } from './user.type.js';
 
 export { CommandName } from './command-name.enum.js';
 export { FileReaderEvent } from './file-reader-event.enum.js';
+
+export { Component } from './component.enum.js';
