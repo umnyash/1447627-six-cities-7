@@ -12,3 +12,5 @@ export { CommandName } from './command-name.enum.js';
 export { FileReaderEvent } from './file-reader-event.enum.js';
 
 export { Component } from './component.enum.js';
+
+export { MongoConnectionOptions } from './mongo-connection-options-type.js';
