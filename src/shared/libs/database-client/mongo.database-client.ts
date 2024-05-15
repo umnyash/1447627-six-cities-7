@@ -55,7 +55,7 @@ export class MongoDatabaseClient implements DatabaseClient {
       return;
     }
 
-    await this.mongoose.disconnect?.();
+    await this.mongoose.disconnect();
     this.isConnected = false;
     this.logger.info('Database connection closed.');
   }
