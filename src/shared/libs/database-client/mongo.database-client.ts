@@ -24,7 +24,8 @@ export class MongoDatabaseClient implements DatabaseClient {
 
   public async connect(uri: string): Promise<void> {
     if (this.isConnectedToDatabase()) {
-      throw new Error('MongoDB client already connected');
+      this.logger.info('MongoDB client already connected.');
+      return;
     }
 
     this.logger.info('Trying to connect to MongoDB…');
@@ -50,7 +51,8 @@ export class MongoDatabaseClient implements DatabaseClient {
 
   public async disconnect(): Promise<void> {
     if (!this.isConnectedToDatabase()) {
-      throw new Error('Not connected to the database');
+      this.logger.info('Not connected to the database.');
+      return;
     }
 
     await this.mongoose.disconnect?.();
