@@ -21,64 +21,52 @@ export interface OfferEntity extends defaultClasses.Base { }
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({ trim: true, required: true })
-  public title!: string;
+  public title: string;
 
   @prop({ trim: true, required: true })
-  public description!: string;
+  public description: string;
 
   @prop({ required: true })
-  public postDate!: Date;
+  public postDate: Date;
 
-  @prop({
-    type: () => String,
-    enum: CityName,
-    required: true,
-  })
-  public city!: CityName;
+  @prop({ enum: CityName, required: true })
+  public city: CityName;
 
   @prop({ required: true })
-  public previewPhoto!: string;
+  public previewPhoto: string;
+
+  @prop({ type: () => [String], required: true })
+  public photos: string[];
 
   @prop({ required: true })
-  public photos!: string[];
+  public isPremium: boolean;
 
   @prop({ required: true })
-  public isPremium!: boolean;
+  public isFavorite: boolean;
 
   @prop({ required: true })
-  public isFavorite!: boolean;
+  public rating: number;
+
+  @prop({ enum: HousingType, required: true })
+  public housingType: HousingType;
 
   @prop({ required: true })
-  public rating!: number;
-
-  @prop({
-    type: () => String,
-    enum: HousingType,
-  })
-  public housingType!: HousingType;
+  public numberOfRooms: number;
 
   @prop({ required: true })
-  public numberOfRooms!: number;
+  public numberOfGuests: number;
 
   @prop({ required: true })
-  public numberOfGuests!: number;
+  public price: number;
 
-  @prop({ required: true })
-  public price!: number;
-
-  @prop({
-    default: [],
-  })
-  public amenities!: AmenityName[];
+  @prop({ type: () => [String], default: [] })
+  public amenities: AmenityName[];
 
   @prop({ default: 0 })
-  public commentCount!: number;
+  public commentCount: number;
 
-  @prop({
-    ref: UserEntity,
-    required: true
-  })
-  public author!: Ref<UserEntity>;
+  @prop({ ref: UserEntity, required: true })
+  public author: Ref<UserEntity>;
 
   @prop({ required: true })
   public location: Location;
