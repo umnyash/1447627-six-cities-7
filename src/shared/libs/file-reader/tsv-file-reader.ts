@@ -43,7 +43,7 @@ export class TSVFileReader extends EventEmitter implements FileReader {
       userPassword,
       userType,
       userAvatar,
-    ] = line.split('\t');
+    ] = line.trim().split('\t');
 
     return {
       title,
@@ -70,7 +70,7 @@ export class TSVFileReader extends EventEmitter implements FileReader {
     email: string,
     password: string,
     type: UserType,
-    avatar: string = 'default-avatar.png'
+    avatar: string,
   ): User {
     return {
       name,
@@ -108,7 +108,10 @@ export class TSVFileReader extends EventEmitter implements FileReader {
         importedRowCount++;
 
         const parsedOffer = this.parseLineToOffer(completeRow);
-        this.emit(FileReaderEvent.Line, parsedOffer);
+
+        await new Promise((resolve) => {
+          this.emit(FileReaderEvent.Line, parsedOffer, resolve);
+        });
 
         nextLinePosition = remainingData.indexOf('\n');
       }
