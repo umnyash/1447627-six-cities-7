@@ -1,0 +1,1173 @@
+openapi: 3.1.0
+info:
+  title: API сервер для проекта «Шесть городов».
+  description: |-
+    * Список ресурсов и маршрутов сервера «Шесть городов».
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 2.0.0
+  tags:
+    - name: users
+      description: Действия с пользователями.
+    - name: offers
+      description: Действия с предложениями по аренде.
+    - name: comments
+      description: Действия с комментариями.
+
+paths:
+  /users/register:
+    post:
+      tags:
+        - users
+      summary: Регистрация пользователя.
+      description: Регистрирует нового пользователя.
+
+      requestBody:
+        description: Информация для создания нового пользователя.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 15
+                  example: Rusik
+                email:
+                  type: string
+                  example: umnyash@umnicorp.com
+                password:
+                  type: string
+                  minLength: 6
+                  maxLength: 12
+                  example: pass123
+                type:
+                  type: string
+                  enum: [basic, pro]
+                  example: pro
+                avatar:
+                  type: string
+                  example: my-best-photo.jpg
+                  nullable: true
+        required: true
+
+      responses:
+        "201":
+          description: Успешная регистрация.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 15
+                    example: Rusik
+                  email:
+                    type: string
+                    example: umnyash@umnicorp.com
+                  password:
+                    type: string
+                    minLength: 6
+                    maxLength: 12
+                    example: pass123
+                  type:
+                    type: string
+                    enum: [basic, pro]
+                    example: pro
+                  avatar:
+                    type: string
+                    example: my-best-photo.jpg
+                    nullable: true
+                  token:
+                    type: string
+                    example: H7E2XGmR3e6_C3QEsRJfjYI1K9
+        "409":
+          description: Пользователь с таким email уже существует.
+
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: Авторизоваться на сервере
+      description: Отправляет авторизационные данные пользователя (логин и пароль).
+
+      requestBody:
+        description: Объект, содержащий логин и пароль пользователя.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: umnyash@umnicorp.com
+                password:
+                  type: string
+                  minLength: 6
+                  maxLength: 12
+                  example: pass123
+        required: true
+
+      responses:
+        "200":
+          description: Успешная авторизация.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 15
+                    example: Rusik
+                  email:
+                    type: string
+                    example: umnyash@umnicorp.com
+                  password:
+                    type: string
+                    minLength: 6
+                    maxLength: 12
+                    example: pass123
+                  type:
+                    type: string
+                    enum: [basic, pro]
+                    example: pro
+                  avatar:
+                    type: string
+                    example: my-best-photo.jpg
+                    nullable: true
+                  token:
+                    type: string
+                    example: H7E2XGmR3e6_C3QEsRJfjYI1K9
+        "401":
+          description: Неверные логин или пароль.
+
+    get:
+      tags:
+        - users
+      summary: Проверить статус авторизации пользователя
+      description: Возвращает информацию о статусе авторизации пользователя.
+
+      responses:
+        "200":
+          description: Пользователь авторизован.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 1
+                    maxLength: 15
+                    example: Rusik
+                  email:
+                    type: string
+                    example: umnyash@umnicorp.com
+                  password:
+                    type: string
+                    minLength: 6
+                    maxLength: 12
+                    example: pass123
+                  type:
+                    type: string
+                    enum: [basic, pro]
+                    example: pro
+                  avatar:
+                    type: string
+                    example: my-best-photo.jpg
+                    nullable: true
+                  token:
+                    type: string
+                    example: H7E2XGmR3e6_C3QEsRJfjYI1K9
+        "401":
+          description: Пользователь не авторизован.
+
+  /users/logout:
+    post:
+      tags:
+        - users
+      summary: Завершить сеанс пользователя
+      description: Завершает сеанс работы — выход из закрытой части приложения.
+
+      responses:
+        "204":
+          description: Сеанс завершён.
+        "401":
+          description: Ошибка.
+
+  /offers:
+    get:
+      tags:
+        - offers
+      summary: Получить список предложений
+      description: Возвращает массив предложений.
+
+      responses:
+        "200":
+          description: Массив предложений.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                  title:
+                    type: string
+                    minLength: 10
+                    maxLength: 100
+                    example: Wood and stone place
+                  description:
+                    type: string
+                    minLength: 20
+                    maxLength: 1024
+                    example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  city:
+                    type: string
+                    example: Hamburg
+                  previewPhoto:
+                    type: string
+                    example: apartment-01.jpg
+                  photos:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - apartment-01.jpg
+                        - apartment-02.jpg
+                        - apartment-03.jpg
+                        - apartment-04.jpg
+                        - apartment-05.jpg
+                        - apartment-06.jpg
+                  isPremium:
+                    type: boolean
+                    example: false
+                  isFavorite:
+                    type: boolean
+                    example: true
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 4.3
+                  housingType:
+                    type: string
+                    example: house
+                  numberOfRooms:
+                    type: number
+                    minimum: 1
+                    maximum: 8
+                    example: 8
+                  numberOfGuests:
+                    type: number
+                    minimum: 1
+                    maximum: 10
+                    example: 10
+                  price:
+                    type: number
+                    minimum: 100
+                    maximum: 100000
+                    example: 20000
+                  amenities:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - Baby seat
+                        - Washer
+                        - Towels
+                        - Fridge
+                  author:
+                    type: string
+                    example: "id47"
+                  location:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        example: 53.550341
+                      longitude:
+                        type: number
+                        example: 10.000654
+
+    post:
+      tags:
+        - offers
+      summary: Создание нового предложения
+      description: Создает новоё предложение.
+
+      requestBody:
+        description: Объект с новым предложением.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 10
+                  maxLength: 100
+                  example: Wood and stone place
+                description:
+                  type: string
+                  minLength: 20
+                  maxLength: 1024
+                  example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                postDate:
+                  type: string
+                  example: 2024-04-29T15:20:00.000Z
+                city:
+                  type: string
+                  example: Hamburg
+                previewPhoto:
+                  type: string
+                  example: apartment-01.jpg
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    example:
+                      - apartment-01.jpg
+                      - apartment-02.jpg
+                      - apartment-03.jpg
+                      - apartment-04.jpg
+                      - apartment-05.jpg
+                      - apartment-06.jpg
+                isPremium:
+                  type: boolean
+                  example: false
+                isFavorite:
+                  type: boolean
+                  example: true
+                rating:
+                  type: number
+                  minimum: 1
+                  maximum: 5
+                  example: 4.3
+                housingType:
+                  type: string
+                  example: house
+                numberOfRooms:
+                  type: number
+                  minimum: 1
+                  maximum: 8
+                  example: 8
+                numberOfGuests:
+                  type: number
+                  minimum: 1
+                  maximum: 10
+                  example: 10
+                price:
+                  type: number
+                  minimum: 100
+                  maximum: 100000
+                  example: 20000
+                amenities:
+                  type: array
+                  items:
+                    type: string
+                    example:
+                      - Baby seat
+                      - Washer
+                      - Towels
+                      - Fridge
+                author:
+                  type: string
+                  example: "id47"
+                location:
+                  type: object
+                  properties:
+                    latitude:
+                      type: number
+                      example: 53.550341
+                    longitude:
+                      type: number
+                      example: 10.000654
+        required: true
+
+      responses:
+        "200":
+          description: Объект, описывающий новое предложение.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 10
+                    maxLength: 100
+                    example: Wood and stone place
+                  description:
+                    type: string
+                    minLength: 20
+                    maxLength: 1024
+                    example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  city:
+                    type: string
+                    example: Hamburg
+                  previewPhoto:
+                    type: string
+                    example: apartment-01.jpg
+                  photos:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - apartment-01.jpg
+                        - apartment-02.jpg
+                        - apartment-03.jpg
+                        - apartment-04.jpg
+                        - apartment-05.jpg
+                        - apartment-06.jpg
+                  isPremium:
+                    type: boolean
+                    example: false
+                  isFavorite:
+                    type: boolean
+                    example: true
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 4.3
+                  housingType:
+                    type: string
+                    example: house
+                  numberOfRooms:
+                    type: number
+                    minimum: 1
+                    maximum: 8
+                    example: 8
+                  numberOfGuests:
+                    type: number
+                    minimum: 1
+                    maximum: 10
+                    example: 10
+                  price:
+                    type: number
+                    minimum: 100
+                    maximum: 100000
+                    example: 20000
+                  amenities:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - Baby seat
+                        - Washer
+                        - Towels
+                        - Fridge
+                  author:
+                    type: string
+                    example: "id47"
+                  location:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        example: 53.550341
+                      longitude:
+                        type: number
+                        example: 10.000654
+        "401":
+          description: Доступ запрещён
+
+  /offers/{offerId}:
+    get:
+      tags:
+        - offers
+      summary: Получить предложение
+      description: Возвращает предложение с идентификатором offerId.
+
+      responses:
+        "200":
+          description: Объект предложения.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 10
+                    maxLength: 100
+                    example: Wood and stone place
+                  description:
+                    type: string
+                    minLength: 20
+                    maxLength: 1024
+                    example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  city:
+                    type: string
+                    example: Hamburg
+                  previewPhoto:
+                    type: string
+                    example: apartment-01.jpg
+                  photos:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - apartment-01.jpg
+                        - apartment-02.jpg
+                        - apartment-03.jpg
+                        - apartment-04.jpg
+                        - apartment-05.jpg
+                        - apartment-06.jpg
+                  isPremium:
+                    type: boolean
+                    example: false
+                  isFavorite:
+                    type: boolean
+                    example: true
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 4.3
+                  housingType:
+                    type: string
+                    example: house
+                  numberOfRooms:
+                    type: number
+                    minimum: 1
+                    maximum: 8
+                    example: 8
+                  numberOfGuests:
+                    type: number
+                    minimum: 1
+                    maximum: 10
+                    example: 10
+                  price:
+                    type: number
+                    minimum: 100
+                    maximum: 100000
+                    example: 20000
+                  amenities:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - Baby seat
+                        - Washer
+                        - Towels
+                        - Fridge
+                  author:
+                    type: string
+                    example: "id47"
+                  location:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        example: 53.550341
+                      longitude:
+                        type: number
+                        example: 10.000654
+        "404":
+          description: Предложение не найдено.
+
+    put:
+      tags:
+        - offers
+      summary: Изменение предложения
+      description: Изменение предложения с идентификатором offerId.
+
+      requestBody:
+        description: Объект с изменённым предложением.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 10
+                  maxLength: 100
+                  example: Wood and stone place
+                description:
+                  type: string
+                  minLength: 20
+                  maxLength: 1024
+                  example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                postDate:
+                  type: string
+                  example: 2024-04-29T15:20:00.000Z
+                city:
+                  type: string
+                  example: Hamburg
+                previewPhoto:
+                  type: string
+                  example: apartment-01.jpg
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    example:
+                      - apartment-01.jpg
+                      - apartment-02.jpg
+                      - apartment-03.jpg
+                      - apartment-04.jpg
+                      - apartment-05.jpg
+                      - apartment-06.jpg
+                isPremium:
+                  type: boolean
+                  example: false
+                isFavorite:
+                  type: boolean
+                  example: true
+                rating:
+                  type: number
+                  minimum: 1
+                  maximum: 5
+                  example: 4.3
+                housingType:
+                  type: string
+                  example: house
+                numberOfRooms:
+                  type: number
+                  minimum: 1
+                  maximum: 8
+                  example: 8
+                numberOfGuests:
+                  type: number
+                  minimum: 1
+                  maximum: 10
+                  example: 10
+                price:
+                  type: number
+                  minimum: 100
+                  maximum: 100000
+                  example: 20000
+                amenities:
+                  type: array
+                  items:
+                    type: string
+                    example:
+                      - Baby seat
+                      - Washer
+                      - Towels
+                      - Fridge
+                author:
+                  type: string
+                  example: "id47"
+                location:
+                  type: object
+                  properties:
+                    latitude:
+                      type: number
+                      example: 53.550341
+                    longitude:
+                      type: number
+                      example: 10.000654
+        required: true
+
+      responses:
+        "200":
+          description: Объект предложения.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 10
+                    maxLength: 100
+                    example: Wood and stone place
+                  description:
+                    type: string
+                    minLength: 20
+                    maxLength: 1024
+                    example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  city:
+                    type: string
+                    example: Hamburg
+                  previewPhoto:
+                    type: string
+                    example: apartment-01.jpg
+                  photos:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - apartment-01.jpg
+                        - apartment-02.jpg
+                        - apartment-03.jpg
+                        - apartment-04.jpg
+                        - apartment-05.jpg
+                        - apartment-06.jpg
+                  isPremium:
+                    type: boolean
+                    example: false
+                  isFavorite:
+                    type: boolean
+                    example: true
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 4.3
+                  housingType:
+                    type: string
+                    example: house
+                  numberOfRooms:
+                    type: number
+                    minimum: 1
+                    maximum: 8
+                    example: 8
+                  numberOfGuests:
+                    type: number
+                    minimum: 1
+                    maximum: 10
+                    example: 10
+                  price:
+                    type: number
+                    minimum: 100
+                    maximum: 100000
+                    example: 20000
+                  amenities:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - Baby seat
+                        - Washer
+                        - Towels
+                        - Fridge
+                  author:
+                    type: string
+                    example: "id47"
+                  location:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        example: 53.550341
+                      longitude:
+                        type: number
+                        example: 10.000654
+        "401":
+          description: Доступ запрещён
+
+    delete:
+      tags:
+        - offers
+      summary: Удаление предложения
+      description: Удаление предложения с идентификатором offerId.
+
+      responses:
+        "204":
+          description: Предложение удалено.
+
+        "401":
+          description: Доступ запрещён
+
+  /favorite:
+    get:
+      tags:
+        - offers
+      summary: Получить список избранных предложений
+      description: Возвращает массив предложений, добавленных в избранное.
+
+      responses:
+        "200":
+          description: Массив предложений.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                  title:
+                    type: string
+                    minLength: 10
+                    maxLength: 100
+                    example: Wood and stone place
+                  description:
+                    type: string
+                    minLength: 20
+                    maxLength: 1024
+                    example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  city:
+                    type: string
+                    example: Hamburg
+                  previewPhoto:
+                    type: string
+                    example: apartment-01.jpg
+                  photos:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - apartment-01.jpg
+                        - apartment-02.jpg
+                        - apartment-03.jpg
+                        - apartment-04.jpg
+                        - apartment-05.jpg
+                        - apartment-06.jpg
+                  isPremium:
+                    type: boolean
+                    example: false
+                  isFavorite:
+                    type: boolean
+                    example: true
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 4.3
+                  housingType:
+                    type: string
+                    example: house
+                  numberOfRooms:
+                    type: number
+                    minimum: 1
+                    maximum: 8
+                    example: 8
+                  numberOfGuests:
+                    type: number
+                    minimum: 1
+                    maximum: 10
+                    example: 10
+                  price:
+                    type: number
+                    minimum: 100
+                    maximum: 100000
+                    example: 20000
+                  amenities:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - Baby seat
+                        - Washer
+                        - Towels
+                        - Fridge
+                  author:
+                    type: string
+                    example: "id47"
+                  location:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        example: 53.550341
+                      longitude:
+                        type: number
+                        example: 10.000654
+        "401":
+          description: Доступ запрещён
+
+  /favorite/{offerId}:
+    get:
+      tags:
+        - offers
+      summary: Изменить статус избранного у предложение
+      description: Возвращает предложение с идентификатором offerId с актуальным состоянием поля isFavorite.
+
+      responses:
+        "200":
+          description: Объект предложения.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 10
+                    maxLength: 100
+                    example: Wood and stone place
+                  description:
+                    type: string
+                    minLength: 20
+                    maxLength: 1024
+                    example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  city:
+                    type: string
+                    example: Hamburg
+                  previewPhoto:
+                    type: string
+                    example: apartment-01.jpg
+                  photos:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - apartment-01.jpg
+                        - apartment-02.jpg
+                        - apartment-03.jpg
+                        - apartment-04.jpg
+                        - apartment-05.jpg
+                        - apartment-06.jpg
+                  isPremium:
+                    type: boolean
+                    example: false
+                  isFavorite:
+                    type: boolean
+                    example: true
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 4.3
+                  housingType:
+                    type: string
+                    example: house
+                  numberOfRooms:
+                    type: number
+                    minimum: 1
+                    maximum: 8
+                    example: 8
+                  numberOfGuests:
+                    type: number
+                    minimum: 1
+                    maximum: 10
+                    example: 10
+                  price:
+                    type: number
+                    minimum: 100
+                    maximum: 100000
+                    example: 20000
+                  amenities:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - Baby seat
+                        - Washer
+                        - Towels
+                        - Fridge
+                  author:
+                    type: string
+                    example: "id47"
+                  location:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        example: 53.550341
+                      longitude:
+                        type: number
+                        example: 10.000654
+        "401":
+          description: Доступ запрещён
+
+  /premium:
+    get:
+      tags:
+        - offers
+      summary: Получить список премиальных предложений
+      description: Возвращает массив премиальных предложений, добавленных в избранное.
+
+      responses:
+        "200":
+          description: Массив предложений.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                  title:
+                    type: string
+                    minLength: 10
+                    maxLength: 100
+                    example: Wood and stone place
+                  description:
+                    type: string
+                    minLength: 20
+                    maxLength: 1024
+                    example: A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  city:
+                    type: string
+                    example: Hamburg
+                  previewPhoto:
+                    type: string
+                    example: apartment-01.jpg
+                  photos:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - apartment-01.jpg
+                        - apartment-02.jpg
+                        - apartment-03.jpg
+                        - apartment-04.jpg
+                        - apartment-05.jpg
+                        - apartment-06.jpg
+                  isPremium:
+                    type: boolean
+                    example: true
+                  isFavorite:
+                    type: boolean
+                    example: true
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 4.3
+                  housingType:
+                    type: string
+                    example: house
+                  numberOfRooms:
+                    type: number
+                    minimum: 1
+                    maximum: 8
+                    example: 8
+                  numberOfGuests:
+                    type: number
+                    minimum: 1
+                    maximum: 10
+                    example: 10
+                  price:
+                    type: number
+                    minimum: 100
+                    maximum: 100000
+                    example: 20000
+                  amenities:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - Baby seat
+                        - Washer
+                        - Towels
+                        - Fridge
+                  author:
+                    type: string
+                    example: "id47"
+                  location:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        example: 53.550341
+                      longitude:
+                        type: number
+                        example: 10.000654
+        "401":
+          description: Доступ запрещён
+
+  /comments/{offerId}:
+    get:
+      tags:
+        - comments
+      summary: Получить список комментариев
+      description: Возвращает список комментариев для предложения с идентификатором offerId.
+
+      responses:
+        "200":
+          description: Массив комментариев.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                  text:
+                    type: string
+                    minLength: 5
+                    maxLength: 1024
+                    example: A good place.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  author:
+                    type: string
+                    example: "id47"
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 5
+
+    post:
+      tags:
+        - comments
+      summary: Добавить новый комментарий
+      description: Добавляет новый комментарий для предложения с идентификатором offerId.
+
+      requestBody:
+        description: Объект с новым комментарием.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  minLength: 5
+                  maxLength: 1024
+                  example: A good place.
+                postDate:
+                  type: string
+                  example: 2024-04-29T15:20:00.000Z
+                author:
+                  type: string
+                  example: "id47"
+                rating:
+                  type: number
+                  minimum: 1
+                  maximum: 5
+                  example: 5
+        required: true
+
+      responses:
+        "200":
+          description: Объект нового комментария.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                    minLength: 5
+                    maxLength: 1024
+                    example: A good place.
+                  postDate:
+                    type: string
+                    example: 2024-04-29T15:20:00.000Z
+                  author:
+                    type: string
+                    example: "id47"
+                  rating:
+                    type: number
+                    minimum: 1
+                    maximum: 5
+                    example: 5
+        "401":
+          description: Доступ запрещён
