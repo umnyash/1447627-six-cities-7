@@ -9,3 +9,6 @@ export const MIN_NUMBER_OF_GUESTS = 1;
 export const MAX_NUMBER_OF_GUESTS = 10;
 export const FIRST_WEEK_DAY = 1;
 export const LAST_WEEK_DAY = 7;
+
+export const DEFAULT_NUMBER_OF_OFFERS = 60;
+export const DEFAULT_NUMBER_OF_PREMIUM_OFFERS = 3;
