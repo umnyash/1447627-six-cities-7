@@ -2,10 +2,12 @@ import { inject, injectable } from 'inversify';
 import { DocumentType, types } from '@typegoose/typegoose';
 
 import { OfferService } from './offer-service.interface.js';
-import { Component } from '../../types/index.js';
+import { Component, SortType } from '../../types/index.js';
 import { Logger } from '../../libs/logger/index.js';
 import { OfferEntity } from './offer.entity.js';
 import { CreateOfferDto } from './dto/create-offer.dto.js';
+import { UpdateOfferDto } from './dto/update-offer.dto.js';
+import { DEFAULT_NUMBER_OF_OFFERS, DEFAULT_NUMBER_OF_PREMIUM_OFFERS } from '../../constants/index.js';
 
 @injectable()
 export class DefaultOfferService implements OfferService {
@@ -21,7 +23,61 @@ export class DefaultOfferService implements OfferService {
     return result;
   }
 
+  public async updateById(offerId: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModel
+      .findByIdAndUpdate(offerId, dto, { new: true })
+      .populate(['author'])
+      .exec();
+  }
+
+  public async deleteById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModel
+      .findByIdAndDelete(offerId)
+      .exec();
+  }
+
+  public async find(number = DEFAULT_NUMBER_OF_OFFERS): Promise<DocumentType<OfferEntity>[]> {
+    return this.offerModel
+      .find()
+      .limit(number)
+      .populate(['author'])
+      .exec();
+  }
+
+  public async findFavorite(): Promise<DocumentType<OfferEntity>[]> {
+    return this.offerModel
+      .find({ isFavorite: true })
+      .populate(['author'])
+      .exec();
+  }
+
+  public async findPremium(number = DEFAULT_NUMBER_OF_PREMIUM_OFFERS): Promise<DocumentType<OfferEntity>[]> {
+    return this.offerModel
+      .find({ isPremium: true })
+      .sort({ createdAt: SortType.Down })
+      .limit(number)
+      .populate(['author'])
+      .exec();
+  }
+
   public async findById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
-    return this.offerModel.findById(offerId);
+    return this.offerModel
+      .findById(offerId)
+      .populate(['author'])
+      .exec();
+  }
+
+  public async incCommentNumber(offerId: string): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModel
+      .findByIdAndUpdate(offerId, {
+        '$inc': {
+          numberOfComments: 1,
+        }
+      }).exec();
+  }
+
+  public async exists(offerId: string): Promise<boolean> {
+    return (await this.offerModel
+      .exists({ _id: offerId })) !== null;
   }
 }
