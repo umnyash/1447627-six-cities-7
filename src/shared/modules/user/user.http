@@ -1,0 +1,28 @@
+# Пользователи
+
+## Создать нового пользователя
+
+POST http://localhost:5000/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "tarasov@yandex.ru",
+  "avatar": "tarasov.jpg",
+  "name": "Vanya",
+  "password": "shining123",
+  "type": "basic"
+}
+
+###
+
+## Авторизовать пользователя
+
+POST http://localhost:5000/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "tarasov@yandex.ru",
+  "password": "shining123"
+}
+
+###

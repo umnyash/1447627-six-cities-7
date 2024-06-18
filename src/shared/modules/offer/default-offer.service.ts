@@ -1,5 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { DocumentType, types } from '@typegoose/typegoose';
+// import { StatusCodes } from 'http-status-codes';
 
 import { OfferService } from './offer-service.interface.js';
 import { Component, SortType } from '../../types/index.js';
@@ -8,6 +9,7 @@ import { OfferEntity } from './offer.entity.js';
 import { CreateOfferDto } from './dto/create-offer.dto.js';
 import { UpdateOfferDto } from './dto/update-offer.dto.js';
 import { DEFAULT_NUMBER_OF_OFFERS, DEFAULT_NUMBER_OF_PREMIUM_OFFERS } from '../../constants/index.js';
+// import { HttpError } from '../../libs/rest/index.js';
 
 @injectable()
 export class DefaultOfferService implements OfferService {
@@ -54,7 +56,7 @@ export class DefaultOfferService implements OfferService {
   public async findPremium(number = DEFAULT_NUMBER_OF_PREMIUM_OFFERS): Promise<DocumentType<OfferEntity>[]> {
     return this.offerModel
       .find({ isPremium: true })
-      .sort({ createdAt: SortType.Down })
+      .sort({ createdAt: SortType.DESC })
       .limit(number)
       .populate(['author'])
       .exec();
