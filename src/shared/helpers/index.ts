@@ -1,4 +1,6 @@
 export {
+  fillDTO,
+  createErrorObject,
   generateRandomValue,
   getRandomItem,
   getRandomItems,

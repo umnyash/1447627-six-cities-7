@@ -26,9 +26,6 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({ trim: true, required: true })
   public description: string;
 
-  @prop({ required: true })
-  public postDate: Date;
-
   @prop({ enum: CityName, required: true })
   public city: CityName;
 
@@ -40,12 +37,6 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({ required: true })
   public isPremium: boolean;
-
-  @prop({ required: true })
-  public isFavorite: boolean;
-
-  @prop({ required: true })
-  public rating: number;
 
   @prop({ enum: HousingType, required: true })
   public housingType: HousingType;
@@ -61,9 +52,6 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({ type: () => [String], default: [] })
   public amenities: AmenityName[];
-
-  @prop({ default: 0 })
-  public commentCount: number;
 
   @prop({ ref: UserEntity, required: true })
   public author: Ref<UserEntity>;
