@@ -14,6 +14,7 @@ export class RestApplication {
 
   constructor(
     @inject(Component.Logger) private readonly logger: Logger,
+    @inject(Component.CommentController) private readonly commentController: Controller,
     @inject(Component.Config) private readonly config: Config<RestSchema>,
     @inject(Component.DatabaseClient) private readonly databaseClient: DatabaseClient,
     @inject(Component.OfferController) private readonly offerController: Controller,
@@ -43,6 +44,7 @@ export class RestApplication {
   private async initControllers() {
     this.server.use('/offers', this.offerController.router);
     this.server.use('/users', this.userController.router);
+    this.server.use('/comments', this.commentController.router);
   }
 
   private async _initMiddleware() {
