@@ -38,10 +38,10 @@ export class DefaultOfferService implements OfferService {
       .exec();
   }
 
-  public async find(number = DEFAULT_NUMBER_OF_OFFERS): Promise<DocumentType<OfferEntity>[]> {
+  public async find(limit = DEFAULT_NUMBER_OF_OFFERS): Promise<DocumentType<OfferEntity>[]> {
     return this.offerModel
       .find()
-      .limit(number)
+      .limit(limit)
       .populate(['author'])
       .exec();
   }
@@ -53,11 +53,11 @@ export class DefaultOfferService implements OfferService {
       .exec();
   }
 
-  public async findPremium(number = DEFAULT_NUMBER_OF_PREMIUM_OFFERS): Promise<DocumentType<OfferEntity>[]> {
+  public async findPremium(city: string, limit = DEFAULT_NUMBER_OF_PREMIUM_OFFERS): Promise<DocumentType<OfferEntity>[]> {
     return this.offerModel
-      .find({ isPremium: true })
+      .find({ isPremium: true, city })
       .sort({ createdAt: SortType.DESC })
-      .limit(number)
+      .limit(limit)
       .populate(['author'])
       .exec();
   }

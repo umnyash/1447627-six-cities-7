@@ -1,5 +1,6 @@
 export const Component = {
   Config: Symbol.for('Config'),
+  CommentController: Symbol.for('CommentController'),
   CommentModel: Symbol.for('CommentModel'),
   CommentService: Symbol.for('CommentService'),
   DatabaseClient: Symbol.for('DatabaseClient'),

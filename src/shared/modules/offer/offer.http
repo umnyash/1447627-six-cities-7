@@ -1,7 +1,12 @@
 # Предложения
 
 ## Получить список предложений
-GET http://localhost:5000/offers HTTP/1.1
+GET http://localhost:5000/offers?limit=2 HTTP/1.1
+Content-Type: application/json
+###
+
+## Получить список premium-предложений
+GET http://localhost:5000/offers/premium?city=Paris&limit=1 HTTP/1.1
 Content-Type: application/json
 ###
 
@@ -10,9 +15,9 @@ POST http://localhost:5000/offers HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "2. Duis maximus odio dolor",
+  "title": "Paris Duis maximus odio dolor",
   "description": "Sed euismod, tortor id tempor venenatis, felis est luctus leo, et interdum lectus orci eu velit. Morbi et rhoncus diam, non blandit massa. Integer tincidunt purus eu tellus commodo ullamcorper.",
-  "city": "Hamburg",
+  "city": "Paris",
   "previewPhoto": "apartment-03.jpg",
   "photos": ["apartment-01.jpg", "apartment-02.jpg", "apartment-03.jpg", "apartment-04.jpg", "apartment-05.jpg", "apartment-06.jpg"],
   "isPremium": true,
@@ -24,7 +29,7 @@ Content-Type: application/json
   "postDate": "2024-05-15T17:10:54.256Z",
   "isFavorite": false,
   "amenities": ["Breakfast", "Air conditioning", "Washer", "Fridge"],
-  "author": "66437ba58cc3a3f37f7e9140",
+  "author": "667233e90385badd490f8b24",
   "location": {
     "latitude": 48.85669,
     "longitude": 2.351500
@@ -33,7 +38,7 @@ Content-Type: application/json
 ###
 
 ## Получить объявление по идентификатору
-GET http://localhost:5000/offers/6671fb9237daa6c850ba0e8e HTTP/1.1
+GET http://localhost:5000/offers/667233e90385badd490f8b21 HTTP/1.1
 ###
 
 ## Удалить объявление по идентификатору
@@ -49,4 +54,9 @@ Content-Type: application/json
   "description": "Проверка обновления",
   "price": 999
 }
+###
+
+## Список комментариев к объявлению
+GET http://localhost:5000/offers/667233e90385badd490f8b21/comments HTTP/1.1
+
 ###

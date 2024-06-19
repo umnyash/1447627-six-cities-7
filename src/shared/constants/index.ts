@@ -1,3 +1,8 @@
+export const OFFER_TITLE_MIN_LENGTH = 10;
+export const OFFER_TITLE_MAX_LENGTH = 100;
+export const OFFER_DESCRIPTION_MIN_LENGTH = 20;
+export const OFFER_DESCRIPTION_MAX_LENGTH = 1024;
+
 export const MIN_PRICE = 100;
 export const MAX_PRICE = 100000;
 export const MIN_RATING = 1;
