@@ -22,12 +22,9 @@ Content-Type: application/json
   "photos": ["apartment-01.jpg", "apartment-02.jpg", "apartment-03.jpg", "apartment-04.jpg", "apartment-05.jpg", "apartment-06.jpg"],
   "isPremium": true,
   "housingType": "house",
-  "numberOfRooms": 9,
+  "numberOfRooms": 5,
   "numberOfGuests": 7,
   "price": 49999,
-  "rating": "2",
-  "postDate": "2024-05-15T17:10:54.256Z",
-  "isFavorite": false,
   "amenities": ["Breakfast", "Air conditioning", "Washer", "Fridge"],
   "author": "667233e90385badd490f8b24",
   "location": {

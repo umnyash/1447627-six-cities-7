@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
   "text": "Как обстоят дела с коробками? Фирменная упаковка сохранена?",
-  "rating": 5,
+  "rating": 4.5,
   "offer": "667233e90385badd490f8b21",
   "author": "667233e90385badd490f8b1f"
 }

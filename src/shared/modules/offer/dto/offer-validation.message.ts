@@ -8,26 +8,25 @@ import {
 
 import { CityName, HousingType, AmenityName } from '../../../types/index.js';
 
-export const CreateOfferValidationMessage = {
+export const OfferValidationMessage = {
   title: {
     invalidFormat: 'Title must be a string',
-    minLength: `Minimum title length must be ${OFFER_TITLE_MIN_LENGTH}`,
-    maxLength: `Maximum title length must be ${OFFER_TITLE_MAX_LENGTH}`,
+    length: `Min length is ${OFFER_TITLE_MIN_LENGTH}, max is ${OFFER_TITLE_MAX_LENGTH}`,
   },
   description: {
     invalidFormat: 'Description must be a string',
-    minLength: `Minimum description length must be ${OFFER_DESCRIPTION_MIN_LENGTH}`,
-    maxLength: `Maximum description length must be ${OFFER_DESCRIPTION_MAX_LENGTH}`,
+    length: `Min length is ${OFFER_DESCRIPTION_MIN_LENGTH}, max is ${OFFER_DESCRIPTION_MAX_LENGTH}`,
   },
   city: {
     invalid: `City must be ${CityName.Amsterdam}, ${CityName.Brussels}, ${CityName.Cologne}, ${CityName.Dusseldorf}, ${CityName.Hamburg} or ${CityName.Paris}`,
   },
   photoPreview: {
-    invalidFormat: 'Photo preview must be an string',
+    invalid: 'Photo preview must be an url',
   },
   photos: {
     invalidFormat: 'Photos must be an array',
-    itemInvalidFormat: 'Photos must be an array of string',
+    invalid: 'Each array element must be a valid URL',
+    invalidLength: 'The array must contain exactly 6 elements',
   },
   isPremium: {
     invalidFormat: 'IsPremium must be a boolean',
@@ -52,17 +51,13 @@ export const CreateOfferValidationMessage = {
   },
   amenities: {
     invalidFormat: 'Field amenities must be an array',
-    itemInvalid: `Amenities item must be ${AmenityName.AirConditioning}, ${AmenityName.BabySeat}, ${AmenityName.Breakfast}, ${AmenityName.Fridge}, ${AmenityName.LaptopFriendlyWorkspace}, ${AmenityName.Towels} or ${AmenityName.Washer}`,
+    invalidLength: 'The array must contain at least one element.',
+    invalid: `Amenities item must be ${AmenityName.AirConditioning}, ${AmenityName.BabySeat}, ${AmenityName.Breakfast}, ${AmenityName.Fridge}, ${AmenityName.LaptopFriendlyWorkspace}, ${AmenityName.Towels} or ${AmenityName.Washer}`,
   },
   author: {
     invalid: 'Author must be a valid id',
   },
   location: {
-    latitude: {
-      invalid: 'Latitude must be a valid latitude coordinate',
-    },
-    longitude: {
-      invalid: 'Longitude must be a valid longitude coordinate',
-    }
+    invalidFormat: 'Location must be an object with latitude and longitude properties'
   },
 } as const;

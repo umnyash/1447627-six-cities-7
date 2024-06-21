@@ -12,7 +12,9 @@ export { CommandName } from './command-name.enum.js';
 export { FileReaderEvent } from './file-reader-event.enum.js';
 
 export { Component } from './component.enum.js';
+export { UserAvatarFormatType } from './user-avatar-format.enum.js';
 
 export { MongoConnectionOptions } from './mongo-connection-options-type.js';
 
 export { SortType } from './sort-type.enum.js';
+export { DocumentExists } from './document-exists.interface.js';
