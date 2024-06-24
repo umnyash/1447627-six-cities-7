@@ -23,7 +23,6 @@ export class CreateCommentDto {
   @IsMongoId({ message: CommentValidationMessage.offer.invalid })
   public offer: string;
 
-  @IsMongoId({ message: CommentValidationMessage.author.invalid })
   public author: string;
 
   @IsInt({ message: CommentValidationMessage.rating.invalidFormat })

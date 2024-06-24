@@ -13,6 +13,7 @@ Content-Type: application/json
 ## Добавить новое предложение
 POST http://localhost:5000/offers HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2NzkzZWRiNjBlMDE5ODZjNjVjN2RjMiIsIm5hbWUiOiJTZW55YSIsImVtYWlsIjoic2VuZWNoa2FAbWFpbC5ydSIsInR5cGUiOiJiYXNpYyIsImlhdCI6MTcxOTIyMjAwNCwiZXhwIjoxNzE5Mzk0ODA0fQ.nHaUz1CzgryFgeJ-QRvLZucQeCnVPMaPt7FgwmS3MoQ
 
 {
   "title": "Paris Duis maximus odio dolor",
@@ -26,7 +27,6 @@ Content-Type: application/json
   "numberOfGuests": 7,
   "price": 49999,
   "amenities": ["Breakfast", "Air conditioning", "Washer", "Fridge"],
-  "author": "667233e90385badd490f8b24",
   "location": {
     "latitude": 48.85669,
     "longitude": 2.351500
@@ -35,7 +35,7 @@ Content-Type: application/json
 ###
 
 ## Получить объявление по идентификатору
-GET http://localhost:5000/offers/667233e90385badd490f8b21 HTTP/1.1
+GET http://localhost:5000/offers/66793f4360e01986c65c7dc6 HTTP/1.1
 ###
 
 ## Удалить объявление по идентификатору

@@ -54,10 +54,9 @@ export const OfferValidationMessage = {
     invalidLength: 'The array must contain at least one element.',
     invalid: `Amenities item must be ${AmenityName.AirConditioning}, ${AmenityName.BabySeat}, ${AmenityName.Breakfast}, ${AmenityName.Fridge}, ${AmenityName.LaptopFriendlyWorkspace}, ${AmenityName.Towels} or ${AmenityName.Washer}`,
   },
-  author: {
-    invalid: 'Author must be a valid id',
-  },
   location: {
-    invalidFormat: 'Location must be an object with latitude and longitude properties'
+    invalidFormat: 'Location must be an object with latitude and longitude properties',
+    invalidLatitude: 'Valut must be latitude.',
+    invalidLongitude: 'Valut must be longitude.'
   },
 } as const;

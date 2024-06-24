@@ -39,11 +39,34 @@ export class DefaultOfferService implements OfferService {
   }
 
   public async find(limit = DEFAULT_NUMBER_OF_OFFERS): Promise<DocumentType<OfferEntity>[]> {
-    return this.offerModel
-      .find()
-      .limit(limit)
-      .populate(['author'])
-      .exec();
+    return this.offerModel.aggregate([
+      {
+        $lookup: {
+          from: 'comments',
+          localField: '_id',
+          foreignField: 'offer',
+          as: 'comments',
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'author',
+          foreignField: '_id',
+          as: 'author'
+        }
+      },
+      {
+        $addFields: {
+          numberOfComments: { $size: '$comments' },
+          rating: { $round: [{ $avg: 'comments.rating' }, 1] },
+          user: { ArrayElemAt: ['$author', 0] }
+        }
+      },
+      { $unset: ['comments'] },
+      { $sort: { createdAt: SortType.DESC } },
+      { $limit: +limit }
+    ]).exec();
   }
 
   public async findFavorite(): Promise<DocumentType<OfferEntity>[]> {

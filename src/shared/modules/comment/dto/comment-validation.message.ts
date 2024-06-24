@@ -11,9 +11,6 @@ export const CommentValidationMessage = {
   offer: {
     invalid: 'Offer must be a valid id',
   },
-  author: {
-    invalid: 'Author must be a valid id',
-  },
   rating: {
     invalidFormat: 'Rating must be an integer',
     minValue: `Minimum rating is ${MIN_RATING}`,

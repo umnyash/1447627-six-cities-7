@@ -1,3 +1,5 @@
+import { Type } from 'class-transformer';
+
 import {
   IsString,
   IsBoolean,
@@ -26,6 +28,8 @@ import {
 } from '../../../constants/index.js';
 
 import { CityName, HousingType, AmenityName, Location } from '../../../types/index.js';
+
+import { LocationDto } from './location.dto.js';
 
 export class UpdateOfferDto {
   @IsOptional()
@@ -87,5 +91,6 @@ export class UpdateOfferDto {
 
   @IsOptional()
   @ValidateNested({ message: OfferValidationMessage.location.invalidFormat })
+  @Type(() => LocationDto)
   public location?: Location;
 }

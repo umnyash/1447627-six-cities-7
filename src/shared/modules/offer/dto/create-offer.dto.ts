@@ -1,3 +1,5 @@
+import { Type } from 'class-transformer';
+
 import {
   IsString,
   IsBoolean,
@@ -5,7 +7,6 @@ import {
   IsUrl,
   IsEnum,
   IsArray,
-  IsMongoId,
   ArrayMinSize,
   ArrayMaxSize,
   Max,
@@ -25,7 +26,9 @@ import {
   NUMBER_OF_PHOTOS, MIN_NUMBER_OF_AMENITIES,
 } from '../../../constants/index.js';
 
-import { CityName, HousingType, AmenityName, Location } from '../../../types/index.js';
+import { CityName, HousingType, AmenityName } from '../../../types/index.js';
+
+import { LocationDto } from './location.dto.js';
 
 export class CreateOfferDto {
   @IsString({ message: OfferValidationMessage.title.invalidFormat })
@@ -74,9 +77,9 @@ export class CreateOfferDto {
   @IsEnum(AmenityName, { each: true, message: OfferValidationMessage.amenities.invalid })
   public amenities: AmenityName[];
 
-  @IsMongoId({ message: OfferValidationMessage.author.invalid })
   public author: string;
 
   @ValidateNested({ message: OfferValidationMessage.location.invalidFormat })
-  public location: Location;
+  @Type(() => LocationDto)
+  public location: LocationDto;
 }

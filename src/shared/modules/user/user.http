@@ -6,9 +6,9 @@ POST http://localhost:5000/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "tarasov3@yandex.ru",
-  "name": "Vanya",
-  "password": "shining123",
+  "email": "senechka@mail.ru",
+  "name": "Senya",
+  "password": "********",
   "type": "basic"
 }
 
@@ -18,22 +18,29 @@ Content-Type: application/json
 
 POST http://localhost:5000/users/login HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2NzkzMWVhOTgxNGIxOGFmYTY4YTA2MCIsIm5hbWUiOiJTZW55YSIsImVtYWlsIjoic2VuZWNoa2FAbWFpbC5ydSIsInR5cGUiOiJiYXNpYyIsImlhdCI6MTcxOTIxODcyMiwiZXhwIjoxNzE5MzkxNTIyfQ.9XNG2-qH8By7vLPQI9yscLMnG5v-eLvKV5EGqIF-zIc
 
 {
-  "email": "tarasov@yandex.ru",
-  "password": "shining123"
+  "email": "senechka@mail.ru",
+  "password": "********"
 }
 
 ###
 
 ## Отправить изображение
-POST http://localhost:5000/users/667233e90385badd490f8b1f/avatar HTTP/1.1
+POST http://localhost:5000/users/6678b2ddf9ac0ff7cda09509/avatar HTTP/1.1
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="avatar"; filename="screen.png"
 Content-Type: image/png
 
-< D:\Downloads\q78kobag9eg41.jpg
+< D:\Projects\1447627-six-cities-7\mocks\pepe.png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+## Проверить токен пользователя
+GET http://localhost:5000/users/login HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2NzkzZWRiNjBlMDE5ODZjNjVjN2RjMiIsIm5hbWUiOiJTZW55YSIsImVtYWlsIjoic2VuZWNoa2FAbWFpbC5ydSIsInR5cGUiOiJiYXNpYyIsImlhdCI6MTcxOTIyMjAwNCwiZXhwIjoxNzE5Mzk0ODA0fQ.nHaUz1CzgryFgeJ-QRvLZucQeCnVPMaPt7FgwmS3MoQ
+
 ###
