@@ -27,3 +27,5 @@ export const USER_PASSWORD_MAX_LENGTH = 12;
 
 export const DEFAULT_NUMBER_OF_OFFERS = 60;
 export const DEFAULT_NUMBER_OF_PREMIUM_OFFERS = 3;
+
+export const TEST = 'test';
